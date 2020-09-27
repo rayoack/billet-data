@@ -40,6 +40,7 @@ class BilletController {
           if(!dealershipPaymentServices.validateBarcodeDV(billetData.barCode, cleanDigitableLine))
             throw new Error('Dígito verificador do código de barras incorreto');
 
+          billetData.dueDate = dealershipPaymentServices.getBilletDueDate(billetData.barCode);
         } else {
           throw new Error('Linha digitável inválida');
         }

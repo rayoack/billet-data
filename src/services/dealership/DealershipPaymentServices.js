@@ -11,16 +11,13 @@ class DealershipPaymentServices {
     const blockFour= digitableLine.slice(36, 47).split('');
     const dvFour= Number(digitableLine.slice(47, 48));
 
-    let digitOneIsValid
-    let digitTwoIsValid
-    let digitThreeIsValid
-    let digitFourIsValid
+    let digitOneIsValid, digitTwoIsValid, digitThreeIsValid, digitFourIsValid
 
     if (digitableLine[2] == '6' || digitableLine[2] == '7') {
-      digitOneIsValid = blocksServices.moduleTen(blockOne, '1') == dvOne;
-      digitTwoIsValid = blocksServices.moduleTen(blockTwo, '2') == dvTwo;
-      digitThreeIsValid = blocksServices.moduleTen(blockThree, '3') == dvThree;
-      digitFourIsValid = blocksServices.moduleTen(blockFour, '4') == dvFour;
+      digitOneIsValid = blocksServices.moduleTen(blockOne) == dvOne;
+      digitTwoIsValid = blocksServices.moduleTen(blockTwo) == dvTwo;
+      digitThreeIsValid = blocksServices.moduleTen(blockThree) == dvThree;
+      digitFourIsValid = blocksServices.moduleTen(blockFour) == dvFour;
     } else if (digitableLine[2] == '8' || digitableLine[2] == '9') {
       digitOneIsValid = blocksServices.moduleEleven(blockOne) == dvOne;
       digitTwoIsValid = blocksServices.moduleEleven(blockTwo) == dvTwo;
@@ -58,6 +55,23 @@ class DealershipPaymentServices {
     }
     
     return calculatedDV == barcodeDV;
+  }
+
+  getBilletDueDate(barcode) {
+    let dueDateCode;
+
+    if (barcode[1] == '6') {
+      dueDateCode = barcode.slice(26, 34);
+    } else {
+      dueDateCode = barcode.slice(19, 27);
+      console.log()
+    };
+
+    let dueDate = `${dueDateCode[4]+dueDateCode[5]}/${dueDateCode[6]+dueDateCode[7]}/${dueDateCode[0]+dueDateCode[1]+dueDateCode[2]+dueDateCode[3]}`
+    
+    return new Date(dueDate) == 'Invalid Date' ?
+      'Sem data de vencimento'
+      : dueDate
   }
 }
 

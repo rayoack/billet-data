@@ -1,5 +1,5 @@
 class BlocksServices {
-  moduleTen(blockNumbers, check = false) {
+  moduleTen(blockNumbers) {
     if(!Array.isArray(blockNumbers)) throw new Error('Erro ao calcular bloco');
 
     let multiplier = 2;
