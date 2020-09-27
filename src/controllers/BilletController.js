@@ -14,12 +14,14 @@ class BilletController {
 
         // Validando os dígitos verificadores da linha digitável do título bancário.
         if(bankBilletServices.validateDigitableLineDVs(cleanDigitableLine)) {
-          // Gerando código de barras
-          billetData.barCode = bankBilletServices.generateBarcode(cleanDigitableLine)
 
-          // Verificando se o código de barras é válido
+          billetData.barCode = bankBilletServices.generateBarcode(cleanDigitableLine)
           if(billetData.barCode.length != 44) throw new Error('Erro ao gerar código de barras');
 
+          if(!bankBilletServices.validateBarcodeDV(billetData.barCode)) {
+            throw new Error('Dígito verificador do código de barras incorreto');
+          }
+          
           return res.json(billetData)
         } else {
           throw new Error('Linha digitável inválida');
