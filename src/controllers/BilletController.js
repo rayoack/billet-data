@@ -36,6 +36,10 @@ class BilletController {
 
         if(dealershipPaymentServices.validateDigitableLineDVs(cleanDigitableLine)) {
           billetData.barCode = dealershipPaymentServices.generateBarcode(cleanDigitableLine);
+
+          if(!dealershipPaymentServices.validateBarcodeDV(billetData.barCode, cleanDigitableLine))
+            throw new Error('Dígito verificador do código de barras incorreto');
+
         } else {
           throw new Error('Linha digitável inválida');
         }

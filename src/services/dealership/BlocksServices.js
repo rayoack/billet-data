@@ -1,20 +1,22 @@
 class BlocksServices {
-  moduleTen(blockNumbers) {
+  moduleTen(blockNumbers, check = false) {
     if(!Array.isArray(blockNumbers)) throw new Error('Erro ao calcular bloco');
 
     let multiplier = 2;
 
     const total = blockNumbers.map(number => {
       let result = Number(number) * multiplier;
+      if(result > 9) result = Math.floor(result / 10) + (result % 10);
       multiplier = multiplier == 2 ? 1 : 2;
       
-      return result;
+      return result
     }).reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
     });
 
+    
     const restOfDivision = (total % 10);
-
+    
     return restOfDivision == 0 ? 0 : 10 - restOfDivision;
   }
 
