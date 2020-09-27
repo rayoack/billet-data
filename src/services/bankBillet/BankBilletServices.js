@@ -64,6 +64,26 @@ class BankBilletServices {
 
     return calculatedDV == barcodeDV;
   }
+
+  getDueDate(barcode) {
+    let dueDateFactor = barcode.slice(5, 9);
+    let baseDate = new Date("10/07/1997");
+    let futureBaseDate = new Date("02/22/2025");
+
+    if(dueDateFactor * 1 == 0) return 'Sem data de vencimento';
+
+    let dueDate
+    if(new Date() < futureBaseDate) {
+      dueDate = new Date(baseDate);
+      dueDate.setDate(dueDate.getDate() + Number(dueDateFactor));
+    } else {
+      dueDate = new Date(futureBaseDate);
+      let futureDueDateFactor = Number(dueDateFactor) % 1000
+      dueDate.setDate(dueDate.getDate() + futureDueDateFactor);
+    }
+
+    return `${dueDate.getDate()}/${dueDate.getMonth()+1}/${dueDate.getFullYear()}`
+  }
 }
 
 module.exports = new BankBilletServices();

@@ -21,6 +21,8 @@ class BilletController {
           if(!bankBilletServices.validateBarcodeDV(billetData.barCode)) {
             throw new Error('Dígito verificador do código de barras incorreto');
           }
+
+          billetData.dueDate = bankBilletServices.getDueDate(billetData.barCode)
           
           return res.json(billetData)
         } else {
