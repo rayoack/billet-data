@@ -65,7 +65,7 @@ class BankBilletServices {
     return calculatedDV == barcodeDV;
   }
 
-  getDueDate(barcode) {
+  getBankBilletDueDate(barcode) {
     let dueDateFactor = barcode.slice(5, 9);
     let baseDate = new Date("10/07/1997");
     let futureBaseDate = new Date("02/22/2025");
@@ -73,16 +73,26 @@ class BankBilletServices {
     if(dueDateFactor * 1 == 0) return 'Sem data de vencimento';
 
     let dueDate
+    // Verificando se a data base 07/10/1997 não está mais em uso.
     if(new Date() < futureBaseDate) {
       dueDate = new Date(baseDate);
       dueDate.setDate(dueDate.getDate() + Number(dueDateFactor));
     } else {
       dueDate = new Date(futureBaseDate);
-      let futureDueDateFactor = Number(dueDateFactor) % 1000
+      // Como a partir de 22/02/2025 o fator retorna para 1000
+      // e se adiciona 1 a cada dia subsequente a este fator
+      // pego o fator de vencimento e obetenho o resto da divisão dele por 1000
+      // para obter os dias corretos a serem adicionados.
+      let futureDueDateFactor = Number(dueDateFactor) % 1000;
       dueDate.setDate(dueDate.getDate() + futureDueDateFactor);
     }
 
     return `${dueDate.getDate()}/${dueDate.getMonth()+1}/${dueDate.getFullYear()}`
+  }
+
+  getBankBilletValue(barcode) {
+    let value = (Number(barcode.slice(9, 19)) / 100).toFixed(2);
+    return `R$${value}`;
   }
 }
 
