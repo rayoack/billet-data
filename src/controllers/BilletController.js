@@ -28,7 +28,7 @@ class BilletController {
             throw new Error('Dígito verificador do código de barras incorreto');
 
           billetData.dueDate = bankBilletServices.getBankBilletDueDate(billetData.barCode);
-          billetData.value = bankBilletServices.getBankBilletValue(billetData.barCode)
+          billetData.value = bankBilletServices.getBankBilletValue(billetData.barCode);
         } else {
           throw new Error('Linha digitável inválida');
         }
@@ -41,6 +41,7 @@ class BilletController {
             throw new Error('Dígito verificador do código de barras incorreto');
 
           billetData.dueDate = dealershipPaymentServices.getBilletDueDate(billetData.barCode);
+          billetData.value = dealershipPaymentServices.getBilletValue(billetData.barCode);
         } else {
           throw new Error('Linha digitável inválida');
         }

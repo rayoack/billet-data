@@ -73,6 +73,12 @@ class DealershipPaymentServices {
       'Sem data de vencimento'
       : dueDate
   }
+
+  getBilletValue(barcode) {
+    return barcode[2] == '6' || barcode[2] == '8' ?
+      `R$${(Number(barcode.slice(4, 15)) / 100).toFixed(2)}`
+      : 'Sem valor'
+  }
 }
 
 module.exports = new DealershipPaymentServices();
