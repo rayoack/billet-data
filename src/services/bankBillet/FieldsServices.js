@@ -1,4 +1,7 @@
 class FieldServices {
+
+  // Método para multiplicar cada número pelo seu peso
+  // e somar para obter o valor total do campo.
   fieldTotal(fieldNumbers, multiplier) {
     if(!Array.isArray(fieldNumbers)) return null;
     const total = fieldNumbers.map(number => {
@@ -15,6 +18,7 @@ class FieldServices {
   }
 
   validateDV(fieldTotal, digit) {
+    // Subtraindo o valor total do campo pela dezena imediatamente posterior.
     let fieldDVResult = (Math.ceil(fieldTotal / 10) * 10) - fieldTotal;
     return fieldDVResult == digit;
   }
