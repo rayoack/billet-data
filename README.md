@@ -9,6 +9,7 @@
 - `yarn add ou npm i` para instalar as dependências do projeto
 - `yarn dev ou npm run dev` para rodar a aplicação
 - A api estará rodando em http://localhost:3000/
+- `yarn test ou npm run test` para rodar os testes da api
 
 ## Sobre o projeto: 📃
 
