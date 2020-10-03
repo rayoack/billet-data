@@ -6,10 +6,15 @@
 
 > Acesse a raiz do projeto por um console e execute:
 
-- `yarn add ou npm i` para instalar as dependências do projeto
-- `yarn dev ou npm run dev` para rodar a aplicação
-- A api estará rodando em http://localhost:3000/
-- `yarn test ou npm run test` para rodar os testes da api
+##### Modo 1:
+- `yarn add ou npm i` para instalar as dependências do projeto.
+- `yarn dev ou npm run dev` para rodar a aplicação.
+- A api estará rodando em http://localhost:3000/.
+- `yarn test ou npm run test` para rodar os testes da api.
+
+##### Modo 2:
+- Instale o `docker` e o `docker-compose` na sua máquina.
+- Execute o código `docker-compose up`.
 
 ## Sobre o projeto: 📃
 
